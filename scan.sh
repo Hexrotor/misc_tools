@@ -1,20 +1,17 @@
-#!/system/bin/sh
-#script for p350 shell
-read "p?Enter port for sanning: "
-#p="5555"
-read "a?Enter a: "
-#a="192"
-read "b?Enter b: "
-read "c?Enter c: "
-echo "Now scaning"
-d=1
-while [ $d != 255 ];do
-	temp=$(busybox timeout 1 busybox telnet $a.$b.$c.$d $p)
-	d=$(( $d + 1 ))
-	if [[ "$temp" == *"Connected"* ]];then
-		ip=$ip [$a.$b.$c.$d]
-		echo Found new IP: $a.$b.$c.$d
-		echo Total devices found: $ip
+#!/system/bin/ sh
+read 'p?Enter port for scanning: '
+read 'a?Enter a: '
+read 'b?Enter b: '
+read 'c?Enter c: '
+i=1
+while [ $i != 255 ];do
+	ip=$(busybox timeout 1 telnet $a.$b.$c.$i $p)
+	if [[ $ip == *"Connected"* ]];then
+		found="$found [$a.$b.$c.$i]"
+		echo Found new IP: $a.$b.$c.$i
+		echo Total devices found: $found
 	fi
+	i=$(( $i + 1 ))
 done
-echo Done. Found IP with port [$p]: $ip
+echo Done. Found IP with port $p: $found
+
