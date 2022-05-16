@@ -40,6 +40,9 @@ iptables -t nat -A PREROUTING -p udp --dport 53 -j DNAT --to-destination 172.18.
 #iptables -t nat -D PREROUTING -p tcp --dport 8005 -j DNAT --to-destination 1.14.51.4:8005
 #curl full screen
 curl -X GET -H "PartImage:support" -H "Accept:video/h264" -H "Host:172.18.24.104:50007" -H "Connection:Keep-Alive" "http://172.18.24.104:50007/"
+#ettercap
+#dns spoof
+ettercap -i wlan0 -Tq -M arp:remote -P dns_spoof -P autoadd /172.18.43.1// ///
 
 #links
 https://www.busybox.net/downloads/binaries/1.31.0-defconfig-multiarch-musl/busybox-armv7l
